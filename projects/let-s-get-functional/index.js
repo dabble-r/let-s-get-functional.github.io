@@ -22,20 +22,73 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
+    let males = _.filter(array, (elem) => elem.gender === 'male').length;
+    return males;
+}
 
-};
+var femaleCount = function(array) {
+    let females = _.reduce(array, function(acc, curr) {
+        if (curr.gender === 'female') {
+            acc++;
+        }
+        return acc;
+    }, 0);
+    return females;
+}
 
-var femaleCount;
+var oldestCustomer = function(array) {
+    let oldest = _.reduce(array, function(acc, curr) {
+        if ( acc.age > curr.age ) {
+            return acc;
+        } else if (acc.age < curr.age) {
+            return curr;
+        }
+    }, );
+    return oldest.name;
+}
 
-var oldestCustomer;
+var youngestCustomer = function(array) {
+    let youngest = _.reduce(array, function(acc, curr) {
+        if ( acc.age < curr.age ) {
+            return acc;
+        } else if (acc.age > curr.age) {
+            return curr;
+        }
+    }, );
+    return youngest.name;
+}
+;
 
-var youngestCustomer;
+var averageBalance = function(array) {
+    let re = /[$,]/g;
+    let balances = [];
+  
+   for ( let i = 0; i < array.length; i++ ) {
+     balances.push(Number(array[i].balance.replace(re, "")));
+   }
+  
+  let totalBalance = _.reduce(balances, function(acc, curr) {
+    return acc + curr;
+  })
+  let avgBalance = totalBalance / balances.length;    
+  
+return avgBalance;
+}
 
-var averageBalance;
-
-var firstLetterCount;
-
-var friendFirstLetterCount;
+var firstLetterCount = function(array, letter) {
+    let namesFirstLetter = _.filter(array, (elem) => elem.name[0].toLowerCase() === letter.toLowerCase()).length;
+    return namesFirstLetter;
+  }
+  
+var friendFirstLetterCount = function(array, customer, letter) {
+    let friendsFirstLetter;
+      for ( let i = 0; i < array.length; i++ ) {
+        if ( array[i].name === customer ) {
+          friendsFirstLetter = _.filter(array[i].friends, elem => elem.name[0].toLowerCase() === letter.toLowerCase()).length;
+        }
+      }
+      return friendsFirstLetter;
+  };
 
 var friendsCount;
 
