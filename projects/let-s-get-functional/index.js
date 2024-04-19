@@ -90,11 +90,43 @@ var friendFirstLetterCount = function(array, customer, letter) {
       return friendsFirstLetter;
   };
 
-var friendsCount;
+  var friendsCount = function(array, name) {
+    let count = [];
+    for ( let i = 0; i < array.length; i++ ) {
+      for ( let j = 0; j < array[i].friends.length; j++ ) {
+        if ( array[i].friends[j].name === name) {
+          count.push(array[i].name);
+        }
+      }
+    }
+   return count;
+};
 
-var topThreeTags;
+  var topThreeTags = function(array, elem) {
+    let allTags = array.reduce((acc,curr) => {
+        for (let i = 0; i < curr[elem].length - 1; i++) {
+          acc.push(curr[elem][0]);
+        }
+        return acc;
+    }, []);
+    allTags
+    return allTags;
+  };
+  
 
-var genderCount;
+var genderCount = function(array, elem) {
+  let genderBreakdown = _.reduce(array, (acc, curr) {
+    for (let i = 0; i < curr[elem].length; i++) {
+      if (acc[curr][elem[i]]) {
+        acc[curr][elem[i]]++;
+      } else if (!acc[curr][elem[i]]) {
+        acc[curr][elem[i]] = 1;
+      }
+    }
+    return acc;
+  }, []);
+  return genderBreakdown;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
